@@ -36,6 +36,13 @@ phases:
       workDir: '/build'
       containerCommand: '/src/ci/test.sh'
       detached: false
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: linux_trusty_gcc_mbedtls
   displayName: 'Linux (Trusty; GCC; mbedTLS)'
@@ -69,6 +76,13 @@ phases:
       workDir: '/build'
       containerCommand: '/src/ci/test.sh'
       detached: false
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: linux_trusty_clang_openssl
   displayName: 'Linux (Trusty; Clang; OpenSSL)'
@@ -100,6 +114,13 @@ phases:
       workDir: '/build'
       containerCommand: '/src/ci/test.sh'
       detached: false
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: linux_trusty_clang_mbedtls
   displayName: 'Linux (Trusty; Clang; mbedTLS)'
@@ -133,6 +154,13 @@ phases:
       workDir: '/build'
       containerCommand: '/src/ci/test.sh'
       detached: false
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: macos
   displayName: 'macOS'
@@ -150,6 +178,13 @@ phases:
     env:
       TMPDIR: $(Agent.TempDirectory)
       LEAK_CHECK: leaks
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: windows_vs_amd64
   displayName: 'Windows (Visual Studio; amd64)'
@@ -162,6 +197,13 @@ phases:
       CMAKE_OPTIONS: -DMSVC_CRTDBG=ON -G"Visual Studio 12 2013 Win64"
   - powershell: . '$(Build.SourcesDirectory)\ci\test.ps1'
     displayName: Test
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: windows_vs_x86
   displayName: 'Windows (Visual Studio; x86)'
@@ -174,6 +216,13 @@ phases:
       CMAKE_OPTIONS: -DMSVC_CRTDBG=ON -G"Visual Studio 12 2013"
   - powershell: . '$(Build.SourcesDirectory)\ci\test.ps1'
     displayName: Test
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: windows_mingw_amd64
   displayName: 'Windows (MinGW; amd64)'
@@ -192,6 +241,13 @@ phases:
       PATH: $(Agent.TempDirectory)\mingw64\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\CMake\bin
   - powershell: . '$(Build.SourcesDirectory)\ci\test.ps1'
     displayName: Test
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
 
 - phase: windows_mingw_x86
   displayName: 'Windows (MinGW; x86)'
@@ -210,3 +266,10 @@ phases:
       PATH: $(Agent.TempDirectory)\mingw32\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\CMake\bin
   - powershell: . '$(Build.SourcesDirectory)\ci\test.ps1'
     displayName: Test
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFiles: 'results_*.xml'
+      searchFolder: '$(Build.BinariesDirectory)'
+      mergeTestResults: true
